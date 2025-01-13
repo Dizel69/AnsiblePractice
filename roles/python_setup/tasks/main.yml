@@ -1,0 +1,10 @@
+---
+- name: Установить Python
+  apt:
+    name: python3
+    state: present
+
+- name: Генерация конфигурационного файла для Flask
+  ansible.builtin.template:
+    src: flask_app_config.py.j2
+    dest: /var/www/app/config.py

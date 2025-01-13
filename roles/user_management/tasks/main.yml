@@ -1,0 +1,5 @@
+---
+- name: Создать пользователя DevOps
+  user:
+    name: devops_user
+    shell: /bin/bash

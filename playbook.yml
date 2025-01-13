@@ -1,0 +1,11 @@
+---
+- name: Настройка веб-сервера с Nginx и Python
+  hosts: web
+  become: true
+  vars_files:
+    - "roles/nginx/vars/{{ ansible_environment }}.yml"
+  roles:
+    - nginx
+    - user_management
+    - python_setup
+    - ufw

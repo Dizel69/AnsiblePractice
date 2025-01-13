@@ -1,0 +1,25 @@
+---
+- name: Устанавливаем UFW
+  ansible.builtin.package:
+    name: ufw
+    state: present
+
+- name: Разрешаем SSH
+  ansible.builtin.ufw:
+    rule: allow
+    port: 22
+
+- name: Разрешаем HTTP
+  ansible.builtin.ufw:
+    rule: allow
+    port: 80
+
+- name: Разрешаем HTTPS
+  ansible.builtin.ufw:
+    rule: allow
+    port: 443
+
+- name: Включаем UFW
+  ansible.builtin.ufw:
+    state: enabled
+    policy: deny

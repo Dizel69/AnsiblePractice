@@ -1,0 +1,5 @@
+# Конфигурация приложения Flask
+class Config:
+    DEBUG = {{ debug | default(false) }}
+    PORT = {{ flask_port }}
+    LOGGING_LEVEL = '{{ logging_level | default("INFO") }}'
