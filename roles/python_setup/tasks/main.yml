@@ -23,8 +23,29 @@
     dest: /etc/systemd/system/flask_app.service
   notify: Перезапустить Flask
 
-- name: Включить и запустить Flask-приложение
-  systemd:
+- name: Запустить контейнер с Flask
+  community.docker.docker_container:
     name: flask_app
+    image: flask_app_image
     state: started
-    enabled: true
+    restart_policy: always
+    ports:
+      - "{{ flask_port }}:5000"
+    volumes:
+      - /var/www/app:/app
+    env:
+      FLASK_ENV: production
+      FLASK_APP: app.py
+
+- name: Собираем Docker-образ Flask
+  community.docker.docker_image:
+    name: flask_app_image
+    build:
+      path: /var/www/app
+    source: build
+    state: present
+
+- name: Копируем Dockerfile в приложение
+  ansible.builtin.template:
+    src: Dockerfile.j2
+    dest: /var/www/app/Dockerfile
