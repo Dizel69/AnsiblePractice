@@ -1,10 +1,30 @@
 ---
-- name: Установить Python
+- name: Установить Python и pip
   apt:
-    name: python3
+    name:
+      - python3
+      - python3-pip
     state: present
 
-- name: Генерация конфигурационного файла для Flask
+- name: Установить зависимости Flask
+  pip:
+    name: flask
+    state: present
+
+- name: Копируем приложение Flask
   ansible.builtin.template:
-    src: flask_app_config.py.j2
-    dest: /var/www/app/config.py
+    src: flask_app.py.j2
+    dest: /var/www/app/app.py
+    mode: '0755'
+
+- name: Копируем systemd unit для Flask
+  ansible.builtin.template:
+    src: flask_app.service.j2
+    dest: /etc/systemd/system/flask_app.service
+  notify: Перезапустить Flask
+
+- name: Включить и запустить Flask-приложение
+  systemd:
+    name: flask_app
+    state: started
+    enabled: true

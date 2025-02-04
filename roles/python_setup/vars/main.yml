@@ -1,2 +1,1 @@
 flask_port: 5000
-logging_level: DEBUG
