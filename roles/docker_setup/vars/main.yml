@@ -1,0 +1,2 @@
+docker_compose_project_path: "/var/www/app"
+flask_port: 5000

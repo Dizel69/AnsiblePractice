@@ -1,0 +1,39 @@
+---
+- name: Установить зависимости
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+
+- name: Добавить GPG-ключ Docker
+  ansible.builtin.shell: |
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  args:
+    warn: false
+
+- name: Добавить репозиторий Docker
+  ansible.builtin.shell: |
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  args:
+    warn: false
+
+- name: Обновить apt и установить Docker
+  apt:
+    update_cache: yes
+    name: docker-ce
+    state: present
+
+- name: Запустить и включить Docker
+  service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Запустить контейнер с Flask
+  community.docker.docker_compose:
+    project_src: "{{ docker_compose_project_path }}"
+    state: present
+
