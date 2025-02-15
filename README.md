@@ -18,7 +18,7 @@
 ├── AnsiblePractice/                       # Корневая директория проекта
     ├── README.md                          # Описание проекта
     ├── ansible.cfg                        # Основной конфиг для настройки Ansible 
-    ├── Dockerfile
+    ├── Dockerfile                         # Dockerfile для запуска контейнера
     ├──docker-compose.yml
     ├── playbook.yml                       # Главный playbook для запуска задач
     ├── inventory/                         # Папка с инвентарями для разных окружений
