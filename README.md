@@ -19,7 +19,7 @@
     ├── README.md                          # Описание проекта
     ├── ansible.cfg                        # Основной конфиг для настройки Ansible 
     ├── Dockerfile                         # Dockerfile для запуска контейнера
-    ├──docker-compose.yml
+    ├──docker-compose.yml                  # docker-cmpose файл для запуска контейнера
     ├── playbook.yml                       # Главный playbook для запуска задач
     ├── inventory/                         # Папка с инвентарями для разных окружений
     |   ├── production.ini                 # Инвентарь для production окружения 
