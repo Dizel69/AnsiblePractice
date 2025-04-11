@@ -6,7 +6,7 @@
       - python3-pip
     state: present
 
-- name: Установить зависимости Flask
+- name: Установить зависимости для Flask
   pip:
     name: flask
     state: present
